@@ -1,11 +1,5 @@
 import os
 
-# Map of file extensions to convert (e.g., legacy or unsupported formats)
-file_type_map = {
-    ".webp": ".png",
-    ".doc": ".docx"
-}
-
 # Converts a Windows file path to Linux format
 def wfp_to_lfp(wfp):
     drive = wfp[0].lower()  # Get drive letter (e.g., 'C')
@@ -20,12 +14,6 @@ def lfp_to_wfp(lfp):
         return f"{drive.upper()}:\\{rest}"
     else:
         return lfp  # Leave unchanged if not a /mnt path
-
-# Translates file extensions based on defined rules
-def translate_file_type(filepath):
-    base, ext = os.path.splitext(filepath)
-    ext = ext.lower()
-    return base + file_type_map[ext] if ext in file_type_map else filepath
 
 # Main interaction loop
 def main():
@@ -50,8 +38,6 @@ def main():
         result = wfp_to_lfp(fp)
     else:
         result = lfp_to_wfp(fp)
-
-    result = translate_file_type(result)
 
     print(f"Translated {startfp} to {endfp}:")
     print(result)
